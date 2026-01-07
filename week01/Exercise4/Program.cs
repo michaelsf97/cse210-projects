@@ -32,6 +32,7 @@ class Program
             double average = (double)sum / count;
             Console.WriteLine($"The sum is: {sum}");
             Console.WriteLine($"The average is: {average}");
+            Console.WriteLine($"The largest number is: {largest}");
         }
         else
         {
