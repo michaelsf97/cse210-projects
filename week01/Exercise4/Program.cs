@@ -11,6 +11,7 @@ class Program
         int number = -1;
         int sum = 0;
         int count = 0;
+        int largest = int.MinValue;
 
         while (number != 0)
         {
@@ -19,6 +20,10 @@ class Program
             {
                 sum += number;
                 count++;
+                if (number > largest)
+                {
+                    largest = number;
+                }
             }
         }
 
