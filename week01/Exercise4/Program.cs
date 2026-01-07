@@ -10,6 +10,7 @@ class Program
 
         int number = -1;
         int sum = 0;
+        int count = 0;
 
         while (number != 0)
         {
@@ -17,9 +18,19 @@ class Program
             if (number != 0)
             {
                 sum += number;
+                count++;
             }
         }
 
-        Console.WriteLine($"The sum is: {sum}");
+        if (count > 0)
+        {
+            double average = (double)sum / count;
+            Console.WriteLine($"The sum is: {sum}");
+            Console.WriteLine($"The average is: {average}");
+        }
+        else
+        {
+            Console.WriteLine("Nothing was entered.");
+        }
     }
 }
