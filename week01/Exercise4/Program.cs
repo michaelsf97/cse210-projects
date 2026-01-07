@@ -12,6 +12,7 @@ class Program
         int count = 0;
         int largest = int.MinValue;
         int smallestPositive = int.MaxValue;
+        List<int> numbers = new List<int>();
 
         while (number != 0)
         {
@@ -20,6 +21,7 @@ class Program
             {
                 sum += number;
                 count++;
+                numbers.Add(number);
                 if (number > largest)
                 {
                     largest = number;
@@ -28,8 +30,7 @@ class Program
                 {
                     smallestPositive = number;
                 }
-
-        }
+            }
         }
 
         if (count > 0)
@@ -50,6 +51,15 @@ class Program
         else
         {
             Console.WriteLine("Nothing was entered.");
+        }
+        if (numbers.Count > 0)
+        {
+            numbers.Sort();
+            Console.WriteLine("The sorted list is: ");
+            foreach (int num in numbers)
+            {
+                Console.WriteLine(num);
+            }
         }
     }
 }
