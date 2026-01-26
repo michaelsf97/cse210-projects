@@ -8,7 +8,7 @@ class Program
         Console.WriteLine("Welcome to the program!");
         string name = PromptUserName();
         int number = PromptFavoriteNumber();
-        int square = SquareNumber();
+        int square = SquareNumber(number);
         Console.WriteLine($"{name}, the square of your favorite number is: {square}");
     }
 
@@ -22,7 +22,7 @@ class Program
     {
         Console.WriteLine("Please enter your favorite number: ");
         string input = Console.ReadLine();
-        int number; int.Parse(input);
+        int number = int.Parse(input);
         return number;
     }
 
