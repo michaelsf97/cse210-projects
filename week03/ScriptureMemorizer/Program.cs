@@ -22,14 +22,38 @@ class Program
 
         foreach (string scripture in scriptures)
         {
+
             Console.WriteLine(scripture);
-                    Console.WriteLine("Press Enter to continue or type 'quit' to exit.");
-                    string input = Console.ReadLine();
-                    if (input.ToLower() == "quit")
+            Console.WriteLine("Press Enter to continue or type 'quit' to exit.");
+            string input = Console.ReadLine();
+            if (input.ToLower() == "quit")
             {
                 break;
             }
-            
+
+            var words = scripture.Split(' ');
+            var hidden = new bool[words.Length];
+            var rand = new Random();
+            while (Array.Exists(hidden, h => !h))
+            {
+                Console.Clear();
+                for (int i = 0; i < words.Length; i++)
+                    Console.Write(hidden[i] ? "_____ " : words[i] + " ");
+                Console.WriteLine();
+                Console.WriteLine("\nPress Enter to hide more words");
+                Console.ReadKey(true);
+                int count = 0;
+                while (count < 2 && Array.Exists(hidden, h => !h))
+                {
+                    int index = rand.Next(words.Length);
+                    if (!hidden[index]) { hidden[index] = true; count++; }
+                }
+            }
+            // After all words are hidden, show the fully hidden scripture one last time
+            Console.Clear();
+            for (int i = 0; i < words.Length; i++)
+                Console.Write("_____ ");
+            Console.WriteLine();
         }
 
         Console.Clear();
