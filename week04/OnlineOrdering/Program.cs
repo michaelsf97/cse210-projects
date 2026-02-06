@@ -3,8 +3,26 @@ using System.Linq;
 
 class Customer
 {
-    public string Name { get; set; }
-    public Address Address { get; set; }
+    private string _name;
+    private Address _address;
+
+    public string Name
+    {
+        get { return _name; }
+        set { _name = value; }
+    }
+
+    public Address Address
+    {
+        get { return _address; }
+        set { _address = value; }
+    }
+
+    public Customer(string name, Address address)
+    {
+        _name = name;
+        _address = address;
+    }
 
     public string GetShippingLabel()
     {
@@ -15,12 +33,12 @@ class Customer
 
 class Address
 {
-    public string Street { get; set; }
-    public string City { get; set; }
-    public string State { get; set; }
-    public string Country { get; set; }
-    public string ZipCode { get; set; }
-    public bool IsInUSA()
+    private string Street { get; set; }
+    private string City { get; set; }
+    private string State { get; set; }
+    private string Country { get; set; }
+    private string ZipCode { get; set; }
+    private bool IsInUSA()
     {
         if (Country == null) return false;
         string c = Country.Trim().ToUpper();
@@ -28,7 +46,7 @@ class Address
         
     }
 
-    public string GetFullAddress()
+    private string GetFullAddress()
     {
         return $"{Street}, {City}, {State}, {ZipCode}, {Country}";
     }
@@ -36,31 +54,57 @@ class Address
 
 class Order
 {
-    public Customer Customer { get; set; }
+    private Customer _customer;
+    public Customer Customer 
+    {
+            get { return _customer; }
+            set { _customer = value; }
+    }
     public List<Product> Products { get; set; }
 
     public string GetShippingLabel()
 
     {
-        return $"Shipping to: {Customer.Name}, {Customer.Address.Street}, {Customer.Address.City}, {Customer.Address.State}, {Customer.Address.ZipCode}, {Customer.Address.Country}";
+        return $"Shipping to: {_customer.Name}, {_customer.Address.Street}, {_customer.Address.City}, {_customer.Address.State}, {_customer.Address.ZipCode}, {_customer.Address.Country}";
     }
 }
 
 class Product
 {
-    public int Id { get; set; }
-    public string Name { get; set; }
-    public decimal Price { get; set; }
-    public int Quantity { get; set; }
+    private int _id; 
+    private string _name;
+    private decimal _price;
+    private int _quantity;
+    
+    public int Id 
+    { 
+        get  { return _id; }
+        set  { _id = value; }
+    }
+    public string Name 
+    { 
+        get { return _name;} 
+        set { _name = value; }
+    }
+    public decimal Price
+    { 
+        get { return _price;} 
+        set {_price = value; } 
+    }
+    public int Quantity
+    { 
+        get { return _quantity; }
+        set { _quantity = value;}
+    }
 
     public decimal GetTotalPrice()
     {
-        return Price * Quantity;
+        return _price * _quantity;
     }
 
     public string GetPackingLabel()
     {
-        return $"Product: {Name} (ID: {Id}), Quantity: {Quantity}, Total Price: {GetTotalPrice():C2}";
+        return $"Product: {_name} (ID: {_id}), Quantity: {_quantity}, Total Price: {GetTotalPrice():C2}";
     }
 
 
