@@ -33,12 +33,37 @@ class Customer
 
 class Address
 {
-    private string Street { get; set; }
-    private string City { get; set; }
-    private string State { get; set; }
-    private string Country { get; set; }
-    private string ZipCode { get; set; }
-    private bool IsInUSA()
+    private string _street;
+    public string Street
+    { 
+        get { return _street; }
+        set { _street = value;} 
+    }
+    private string _city; 
+    public string City
+    {
+        get { return _city; }
+        set { _city = value; }
+    }
+    private string _state;
+    public string State
+    {
+        get { return _state; }
+        set { _state = value; } 
+    }
+    private string _country;
+    public string Country
+    {
+         get { return _country; }
+         set { _country = value; }
+    }
+    private string _zipcode;
+    public string ZipCode
+    { 
+        get { return _zipcode; }
+        set { _zipcode = value; } 
+    }
+    public bool IsInUSA()
     {
         if (Country == null) return false;
         string c = Country.Trim().ToUpper();
@@ -46,7 +71,7 @@ class Address
         
     }
 
-    private string GetFullAddress()
+    public string GetFullAddress()
     {
         return $"{Street}, {City}, {State}, {ZipCode}, {Country}";
     }
