@@ -1,4 +1,5 @@
 using System;
+using System.Dynamic;
 using System.Linq;
 
 class Customer
@@ -20,7 +21,7 @@ class Customer
 
     public Customer(string name, Address address)
     {
-        _name = name;
+        _name = name; 
         _address = address;
     }
 
@@ -152,9 +153,17 @@ class Program
             ZipCode = "896547"
         };
 
-        Customer customer = new Customer();
-        customer.Name = "Archangel Michael";
-        customer.Address = address;
+        Address address2 = new Address
+        {
+            Street = "Oregon Street, Avenue Smith",
+            City = "Oregon",
+            State = "Missisippi",
+            Country = "USA",
+            ZipCode = "291955"
+        };
+
+        Customer customer = new Customer("Archangel Michael", address);
+        Customer customer2 = new Customer("Archangel Gabriel", address2);
 
         List<Product> products = new List<Product>
         {
@@ -163,9 +172,17 @@ class Program
             new Product { Id = 3, Name = "Tablet", Price = 299.99m, Quantity = 7 }
         };
 
-        Order order = new Order { Customer = customer, Products = products };
+        List<Product> products2 = new List<Product>
+        {
+            new Product { Id = 4, Name = "Headphones", Price = 199.99m, Quantity = 15 },
+            new Product { Id = 5, Name = "Smartwatch", Price = 499.99m, Quantity = 8},
+            new Product { Id = 6, Name = "Camera", Price = 1569.99m, Quantity = 2},
+        };
 
+        Order order = new Order { Customer = customer, Products = products };
+        Order order2 = new Order { Customer = customer2, Products = products2};
         decimal shippingCost = 25.00m;
+
         if (customer.Address.IsInUSA())
         {
             shippingCost = 5.00m;
@@ -173,6 +190,25 @@ class Program
         else
         {
             shippingCost = 35.00m;
+        }
+
+        decimal shippingCost2 = 25.00m;
+
+        if (customer2.Address.IsInUSA())
+        {
+            shippingCost2 = 5.00m;
+        }
+        else
+        {
+            shippingCost2 = 35.00m;
+        }
+        
+        decimal total2 = products2.Sum(p => p.GetTotalPrice()) + shippingCost2;
+        Console.WriteLine($"Total price + shipping: {total2}");
+        Console.WriteLine(order2.GetShippingLabel());
+        foreach (var product in order2.Products)
+        {
+            Console.WriteLine(product.GetPackingLabel());
         }
 
 
