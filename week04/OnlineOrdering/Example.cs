@@ -18,9 +18,10 @@ public class Student : Person
 
 class Example
 {
-    static void Main(string[] args)
+    public static void Run()
     {
         Student student = new Student();
-        Console.WriteLine(student);
+        Console.WriteLine($"Name: {student.GetName()}");
+        Console.WriteLine($"Number: {student.GetNumber()}");
     }
 }
