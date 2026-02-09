@@ -21,7 +21,7 @@ public class ImageButton : Button
     public string ImagePath { get; set; }
 }
 
-public class Button
+public class Program
 {
     static void Main(string[] args)
     {
