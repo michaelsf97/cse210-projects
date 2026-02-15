@@ -49,13 +49,23 @@ class Program
         {
             Console.WriteLine("Breathe in...");
             for (int i = interval; i > 0 && elapsed < duration; i--, elapsed++);
-            Thread.Sleep(interval * 1000);
-
-            Console.WriteLine("Breathe out...");
-            for (int i = interval; i > 0 && elapsed < duration; i--, elapsed++);
+        {
+            Console.WriteLine(i);
             Thread.Sleep(interval * 1000);
         }
+        if (elapsed >= duration) break;
+        Console.WriteLine("Breathe out...");
+        for (int i= interval; i > 0 && elapsed < duration; i--, elapsed++);
+        {
+            Console.WriteLine(i);
+        Thread.Sleep(interval * 1000);
+        }
     }
+
+        Console.WriteLine("Well Done!!, you have done the breathing activity");
+
+        
+}
 
     static void StartReflectingActivity()
     {
