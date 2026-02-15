@@ -41,7 +41,20 @@ class Program
 
         Console.WriteLine("How long, in seconds, would you like for your session?");
         int duration = int.Parse(Console.ReadLine());
-        Thread.Sleep(3000);
+        Thread.Sleep(5000);
+
+        int interval = 5; 
+        int elapsed = 0;
+        while (elapsed < duration)
+        {
+            Console.WriteLine("Breathe in...");
+            for (int i = interval; i > 0 && elapsed < duration; i--, elapsed++);
+            Thread.Sleep(interval * 1000);
+
+            Console.WriteLine("Breathe out...");
+            for (int i = interval; i > 0 && elapsed < duration; i--, elapsed++);
+            Thread.Sleep(interval * 1000);
+        }
     }
 
     static void StartReflectingActivity()
