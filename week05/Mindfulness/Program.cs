@@ -39,7 +39,9 @@ class Program
     {
         Console.WriteLine("This activity will help you relax by walking your through breathing in and out slowly. Clear your mind and focus on your breathing.");
 
-        Console.WriteLine("How long, in seconds, wpuld you like for your session?");
+        Console.WriteLine("How long, in seconds, would you like for your session?");
+        int duration = int.Parse(Console.ReadLine());
+        Thread.Sleep(3000);
     }
 
     static void StartReflectingActivity()
@@ -84,11 +86,8 @@ class Program
             "Who are people that you have helped this week?",
             "When you have felt the Holy Ghost this month?",
             "Who are some of your personal heroes?",
-        }
-    }
-
-            
-
-        }
+        };
+        int index = random.Next(prompts.Length);
+        Console.WriteLine(prompts[index]);
     }
 }
