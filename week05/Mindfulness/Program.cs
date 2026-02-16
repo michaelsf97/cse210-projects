@@ -127,13 +127,13 @@ class Program
             for (int s = 0; s < pauseSeconds && elapsed < duration; s++, elapsed++)
             {
                 Console.WriteLine(".");
-                Thread.Sleep(1000);
+                Thread.Sleep(5000);
             }
 
             Console.WriteLine();
         }
 
-        Console.WriteLine("Well Done!!, you have completed the reflecting activity.")
+        Console.WriteLine("Well Done!!, you have completed the reflecting activity.");
 
     }
 }
