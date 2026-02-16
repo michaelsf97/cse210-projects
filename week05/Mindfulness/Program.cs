@@ -49,7 +49,7 @@ public class BreathingActivity : Activity
 
             End();
         }
-}
+};
 
 class Program
 {
