@@ -73,7 +73,7 @@ class Program
         Console.WriteLine("How long, in seconds, would you like for your session?");
         int duration = int.Parse(Console.ReadLine());
         Thread.Sleep(5000);
-        
+
         Random random = new Random();
         string[] prompts = {
             "Think of a time when you stood up for someone else.",
@@ -108,12 +108,32 @@ class Program
         Random random = new Random();
         string[] prompts = {
             "Who are people that you appreciate?",
-            "What are personal strengths og yours?",
+            "What are personal strengths of yours?",
             "Who are people that you have helped this week?",
             "When you have felt the Holy Ghost this month?",
             "Who are some of your personal heroes?",
         };
         int index = random.Next(prompts.Length);
         Console.WriteLine(prompts[index]);
+
+        int elapsed = 0;
+        int pauseSeconds = 5;
+
+        while (elapsed < duration)
+        {
+            int questionIndex = random.Next(questions.Length);
+            Console.WriteLine(questions[questionIndex]); 
+
+            for (int s = 0; s < pauseSeconds && elapsed < duration; s++, elapsed++)
+            {
+                Console.WriteLine(".");
+                Thread.Sleep(1000);
+            }
+
+            Console.WriteLine();
+        }
+
+        Console.WriteLine("Well Done!!, you have completed the reflecting activity.")
+
     }
 }
