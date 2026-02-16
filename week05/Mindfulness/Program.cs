@@ -1,6 +1,4 @@
 using System;
-using System.Timers;
-using System.Xml.Serialization;
 
 
 public abstract class Activity
@@ -160,145 +158,44 @@ public class ListingActivity : Activity
     }
 }
 
-public class BreathingActivity : Activity
+class Program
 {
-    public BreathingActivity() : base("Breathing Lesson", "This activity will help you relax by walking your through breathing in and out slowly. Clear your mind and focus on your breathing.")
-    {
-    }
-
-        public override void Start()
-        {
-            base.Start();
-
-            End();
-        }
-};
-
-public abstract class ReflectingActivity : Activity
-{
-    public ReflectingActivity() : base("Reflecting Lesson", "This activity will help you reflect on times in your life when you have shown strength and resilience. This will help you recognize the power you have and how you can use it in other aspects of your life.")
-    {
-    }
-
-        public override void Start()
-        {
-            base.Start();
-            End();   
-        }
-}
-
-public abstract class ListingActivity : Activity
-{
-    public ListingActivity() : base("Listing Lesson", "This activity will help you reflect on the good things in your life by having you list as many things as you can in a certain area.")
-    {
-    }
-        public override void Start()
-        {
-            base.Start();
-            End();
-        }
-}
-
-    private class NewBaseType
-    {
-        static void StartListingActivity()
-        {
-            Console.WriteLine("This activity will help you reflect on the good things in your life by having you list as many as you can in a certain area.");
-            Random random = new Random();
-            string[] prompts = {
-            "Who are people that you appreciate?",
-            "What are personal strengths of yours?",
-            "Who are people that you have helped this week?",
-            "When you have felt the Holy Ghost this month?",
-            "Who are some of your personal heroes?",
-        };
-            int index = random.Next(prompts.Length);
-            Console.WriteLine(prompts[index]);
-
-            int elapsed = 0;
-            int pauseSeconds = 5;
-
-            while (elapsed < duration)
-            {
-                int questionIndex = random.Next(questions.Length);
-                Console.WriteLine(questions[questionIndex]);
-
-                for (int s = 0; s < pauseSeconds && elapsed < duration; s++, elapsed++)
-                {
-                    Console.WriteLine(".");
-                    Thread.Sleep(1000);
-                }
-
-                Console.WriteLine();
-            }
-
-            Console.WriteLine("Well Done!!, you have completed the reflecting activity.");
-
-        }
-    }
-
-    class Program : NewBaseType
-    {
     static void Main(string[] args)
     {
-        Console.WriteLine("Menu Options:");
-        Console.WriteLine("1. Start breathing activity");
-        Console.WriteLine("2. Start reflecting activity");
-        Console.WriteLine("3. Start listing activity");
-        Console.WriteLine("4. Quit");
-        Console.WriteLine("Select a choice from the menu: ");
-
-        string input = Console.ReadLine();
-        switch (input)
+        bool running = true;
+        while (running)
         {
-        case "1":
-            Activity activity = new BreathingActivity();
-            activity.Start();
-            break;
-        case "2":
-            Activity activity = new ReflectingActivity();
-            activity.Start();
-            break;
-        
-        case "3":
-            static void Main(string[] args)
-            {
-                bool running = true;
-                while (running)
-                {
-                    Console.WriteLine("Menu Options:");
-                    Console.WriteLine("1. Start breathing activity");
-                    Console.WriteLine("2. Start reflecting activity");
-                    Console.WriteLine("3. Start listing activity");
-                    Console.WriteLine("4. Quit");
-                    Console.Write("Select a choice from the menu: ");
+            Console.WriteLine("Menu Options:");
+            Console.WriteLine("1. Start breathing activity");
+            Console.WriteLine("2. Start reflecting activity");
+            Console.WriteLine("3. Start listing activity");
+            Console.WriteLine("4. Quit");
+            Console.Write("Select a choice from the menu: ");
 
-                    string input = Console.ReadLine();
-                    switch (input)
-                    {
-                        case "1":
-                            Activity breathing = new BreathingActivity();
-                            breathing.Start();
-                            break;
-                        case "2":
-                            Activity reflecting = new ReflectingActivity();
-                            reflecting.Start();
-                            break;
-                        case "3":
-                            Activity listing = new ListingActivity();
-                            listing.Start();
-                            break;
-                        case "4":
-                            running = false;
-                            Console.WriteLine("Exit");
-                            break;
-                        default:
-                            Console.WriteLine("Invalid choice. Please try again.\n");
-                            break;
-                    }
-                    Console.WriteLine();
-                }
+            string input = Console.ReadLine();
+            switch (input)
+            {
+                case "1":
+                    Activity breathing = new BreathingActivity();
+                    breathing.Start();
+                    break;
+                case "2":
+                    Activity reflecting = new ReflectingActivity();
+                    reflecting.Start();
+                    break;
+                case "3":
+                    Activity listing = new ListingActivity();
+                    listing.Start();
+                    break;
+                case "4":
+                    running = false;
+                    Console.WriteLine("Exit");
+                    break;
+                default:
+                    Console.WriteLine("Invalid choice. Please try again.\n");
+                    break;
             }
+            Console.WriteLine();
         }
     }
-    }
+}
