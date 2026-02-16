@@ -72,6 +72,8 @@ class Program
         Console.WriteLine("This activity will help you reflect on times in your life when you have shown strength and resilience. This will help you recognize the power you have and how you can use it in other aspects of your life.");
         Console.WriteLine("How long, in seconds, would you like for your session?");
         int duration = int.Parse(Console.ReadLine());
+        Thread.Sleep(5000);
+        
         Random random = new Random();
         string[] prompts = {
             "Think of a time when you stood up for someone else.",
