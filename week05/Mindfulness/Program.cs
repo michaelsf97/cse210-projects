@@ -2,6 +2,55 @@ using System;
 using System.Timers;
 using System.Xml.Serialization;
 
+
+public abstract class Activity
+{
+    private string name;
+    private string description;
+    private int duration;
+
+    public Activity(string name, string description)
+    {
+        this.name = name;
+        this.description = description;
+    }
+
+    public void PromptDuration()
+    {
+        Console.WriteLine("How long, in seconds, would you like for your session? ");
+        duration = int.Parse(Console.ReadLine());
+    }
+
+    public int GetDuration() => duration;
+    public virtual void Start()
+    {
+        Console.WriteLine($"Starting {name} activity...");
+        Console.WriteLine(description);
+        PromptDuration();
+        Console.WriteLine("Get ready to begin");
+        Thread.Sleep(3000);
+
+    }
+
+    public virtual void End()
+    {
+        Console.WriteLine($"Well Done!!, you have completed the {name} activity.");
+    }
+
+public class BreathingActivity : Activity
+{
+    public BreathingActivity() : base("Breathing Lesson", "This lesson will help how to relax")
+    {
+    }
+
+        public override void Start()
+        {
+            base.Start();
+
+            End();
+        }
+}
+
 class Program
 {
     static void Main(string[] args)
