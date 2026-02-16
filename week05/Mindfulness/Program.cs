@@ -1,4 +1,5 @@
 using System;
+using System.Timers;
 using System.Xml.Serialization;
 
 class Program
@@ -35,36 +36,34 @@ class Program
         Console.WriteLine();
     }
 
-    static void StartBreathingActivity()
+static void StartBreathingActivity()
+{
+    Console.WriteLine("This activity will help you relax by walking your through breathing in and out slowly. Clear your mind and focus on your breathing.");
+
+    Console.WriteLine("How long, in seconds, would you like for your session?");
+    int duration = int.Parse(Console.ReadLine());
+    Thread.Sleep(5000);
+
+    int interval = 5; 
+    int elapsed = 0;
+    while (elapsed < duration)
     {
-        Console.WriteLine("This activity will help you relax by walking your through breathing in and out slowly. Clear your mind and focus on your breathing.");
-
-        Console.WriteLine("How long, in seconds, would you like for your session?");
-        int duration = int.Parse(Console.ReadLine());
-        Thread.Sleep(5000);
-
-        int interval = 5; 
-        int elapsed = 0;
-        while (elapsed < duration)
-        {
-            Console.WriteLine("Breathe in...");
-            for (int i = interval; i > 0 && elapsed < duration; i--, elapsed++);
+        Console.WriteLine("Breathe in...");
+        for (int i = interval; i > 0 && elapsed < duration; i--, elapsed++)
         {
             Console.WriteLine(i);
             Thread.Sleep(interval * 1000);
         }
         if (elapsed >= duration) break;
         Console.WriteLine("Breathe out...");
-        for (int i= interval; i > 0 && elapsed < duration; i--, elapsed++);
+        for (int i = interval; i > 0 && elapsed < duration; i--, elapsed++)
         {
             Console.WriteLine(i);
-        Thread.Sleep(interval * 1000);
+            Thread.Sleep(interval * 1000);
         }
     }
 
-        Console.WriteLine("Well Done!!, you have done the breathing activity");
-
-        
+    Console.WriteLine("Well Done!!, you have done the breathing activity");
 }
 
     static void StartReflectingActivity()
@@ -94,15 +93,28 @@ class Program
             "What could you learn from this experience that applies to other situations?",
             "What did you learn about yourself through this experience?",
             "How can you keep this experience in mind in the future?",
-
-            
         };
-        int index = random.Next(questions.Length);
-        Console.WriteLine(questions[index]);
+
+        int elapsed = 0;
+        int pauseSeconds = 5;
+
+        while (elapsed < duration)
+        {
+            int questionIndex = random.Next(questions.Length);
+            Console.WriteLine(questions[questionIndex]);
+
+            for (int s = 0; s < pauseSeconds && elapsed < duration; s++, elapsed++)
+            {
+                Console.WriteLine(".");
+                Thread.Sleep(5000);
+            }
+            Console.WriteLine();
+        }
+
+        Console.WriteLine("Well Done!!, you have completed the reflecting activity.");
     }
 
     static void StartListingActivity()
-
     {
         Console.WriteLine("This activity will help you reflect on the good things in your life by having you list as many as you can in a certain area.");
         Random random = new Random();
