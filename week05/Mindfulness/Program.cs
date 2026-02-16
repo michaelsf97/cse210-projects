@@ -52,14 +52,14 @@ static void StartBreathingActivity()
         for (int i = interval; i > 0 && elapsed < duration; i--, elapsed++)
         {
             Console.WriteLine(i);
-            Thread.Sleep(interval * 1000);
+            Thread.Sleep(1000); // 1 second per count
         }
         if (elapsed >= duration) break;
         Console.WriteLine("Breathe out...");
         for (int i = interval; i > 0 && elapsed < duration; i--, elapsed++)
         {
             Console.WriteLine(i);
-            Thread.Sleep(interval * 1000);
+            Thread.Sleep(1000); // 1 second per count
         }
     }
 
@@ -106,7 +106,7 @@ static void StartBreathingActivity()
             for (int s = 0; s < pauseSeconds && elapsed < duration; s++, elapsed++)
             {
                 Console.WriteLine(".");
-                Thread.Sleep(5000);
+                Thread.Sleep(1000);
             }
             Console.WriteLine();
         }
@@ -139,7 +139,7 @@ static void StartBreathingActivity()
             for (int s = 0; s < pauseSeconds && elapsed < duration; s++, elapsed++)
             {
                 Console.WriteLine(".");
-                Thread.Sleep(5000);
+                Thread.Sleep(1000);
             }
 
             Console.WriteLine();
