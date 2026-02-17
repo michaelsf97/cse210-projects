@@ -79,9 +79,16 @@ class Program
 {
     static void Main(string[] args)
     {
+            List<Goal> goals  = new List<Goal>();
+    int totalPoints = 0;
+
+    goals.Add(new SimpleGoal("Run a marathon", "1000"));
+    goals.Add(new EternalGoal("Read The Book Of Mormon", "100"));
+
         bool running = true;
         while (running)
         {
+            Console.WriteLine($"Your Current Score: {totalPoints}");
             Console.WriteLine("Menu Options:");
             Console.WriteLine("1. Create A New Goal");
             Console.WriteLine("2. List Goals");
@@ -95,13 +102,32 @@ class Program
 
         switch (input)
         {
+            case "1":
+                Console.WriteLine("Select Goal Type:");
+                Console.WriteLine("1. Simple Goal");
+                Console.WriteLine("2. Eternal Goal");
+                Console.WriteLine("3. Checklist Goal");
+                string goalType = Console.ReadLine();
+
+                
+            case "5":
+                if (goals[0] is ChecklistGoal checklistGoal)
+                {
+                    checklistGoal.Record();
+                } 
+                else
+                {
+                    goals[0].Complete();
+                }
+                break;
+            case "6":
+                running = false;
+                Console.WriteLine("Quit");
+                break;
+
     }
 
-    List<Goal> goals  = new List<Goal>();
-    int totalPoints = 0;
 
-    goals.Add(new SimpleGoal("Run a marathon", "1000"));
-    goals.Add(new EternalGoal("Read The Book Of Mormon", "100"));
 
 
     goals[0].Complete();
