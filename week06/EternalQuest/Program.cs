@@ -1,5 +1,9 @@
 using System;
-using System.IO.File.ReadAllLines();
+using System.IO.File.ReadAllLines
+
+using System.Runtime;
+using System.Xml.Serialization;
+();
 
 public class Goal
 {
@@ -111,25 +115,93 @@ class Program
 
                 Console.WriteLine("Which type of goal would you like to create? ");
                 string goalType = Console.ReadLine();
+
                 Console.WriteLine("What is the name of your goal? ");
                 string name = Console.ReadLine();
+
                 Console.WriteLine("What is a short description of it? ");
                 string description = Console.ReadLine();
+
                 Console.WriteLine("What is the amount of points associated with this goal? ");
-                string points = Console.ReadLine();
-                
+                int points = Console.ReadLine();
+
+                Console.WriteLine("Bonus points on completion?: ");
+                int bonusPoints = Console.ReadLine();
+
+                ChecklistGoal checklistGoal = new ChecklistGoal (name, points, perCompletion,  bonus);
+                ChecklistGoal.TargetCount = target;
+                goals.Add(checklistGoal);
+        }
+
+        else 
+        Console.WriteLine("Invalid Goal Type. Re-Attempt Goal");
+        break;
+
+                if (goalType == "1")
+                    goals.Add(new SimpleGoal(name, points));
+                    else if (goalType == "2")
+                    goals.Add(new EternalGoal(name, points));
+                    else if (goalType == "3")
+                {
+                    
+      Console.WriteLine("How many times does this goal need to be achieved for a total bonus completion? ");
+                        int targetCount = int.Parse(Console.ReadLine());
+
+                        Console.WriteLine("Points per achievement? ");
+                        int pointsPerAchievement = int.Parse(Console.ReadLine());
+
+                        Console.WriteLine("Bonus points on achievement? ");
+                        int totalBonus = int.Parse(Console.ReadLine());
+
+          }
+
 
 
 
             case "5":
-                if (goals[0] is ChecklistGoal checklistGoal)
+                Console.WriteLine("The goals are:");
+                for (int i = 0; i < goals.Count; i++)
+                Console.WriteLine($"{i+1}. {goals[i].Name}");
+                int selected = int.Parse(Console.ReadLine());
+                Goal chosen = goals[selected - 1 ];
+                int earned = 0;
+                if (chosen is ChecklistGoal checklistGoal)
+
                 {
+                    int before = checklistGoal.CurrentCount;
                     checklistGoal.Record();
+                    if (checklistGoal.CurrentCount > before)
+                    {
+                        earned = checklistGoal.ValuePerCompletion;
+                        {
+                            if (checklistGoal.CurrentCount == checklistGoal.TargetCount)
+                        {
+                            earned += checklistGoal.BonusValue;
+                            Console.WriteLine("Bonus ! You completed the checklist goal.");
+
+                        }
+
+                        }
+                    }
                 } 
-                else
+                else if (chosen is SimpleGoal simpleGoal)
                 {
-                    goals[0].Complete();
+                    if (simpleGoal.IsComplete == "False")
+                    {
+                        simpleGoal.Complete();
+                        earned = int.Parse(simpleGoal.Points);
+                    }
+                    else
+                    Console.WriteLine("This goal is already complete.");
                 }
+                else if (chosen is EternalGoal eternalGoal)
+                {
+                    earned = int.Parse(eternalGoal.Points);
+                    Console.WriteLine("Eternal goal recorded. You can do this as many times as you want!");
+                }
+                totalPoints += earned; 
+                if (earned > 0)
+                Console.WriteLine($"Congratulations!! You earned {earned} points! Total: {totalPoints}");
                 break;
             case "6":
                 running = false;
