@@ -96,7 +96,7 @@ class Program
             Console.WriteLine("4. Load Goals");
             Console.WriteLine("5. Record Event");
             Console.WriteLine("6. Quit");
-            Console.WriteLine("Select a choice from the menu: ");
+            Console.Write("Select a choice from the menu: ");
             string input = Console.ReadLine();
 
             switch (input)
@@ -117,79 +117,132 @@ class Program
                     Console.WriteLine("What is the amount of points associated with this goal? ");
                     int points = int.Parse(Console.ReadLine());
 
-                    if (goalType == "1")
-                    {
-                        goals.Add(new SimpleGoal(name, points.ToString()));
-                    }
-                    else if (goalType == "2")
-                    {
-                        goals.Add(new EternalGoal(name, points.ToString()));
-                    }
-                    else if (goalType == "3")
-                    {
-                        Console.WriteLine("How many times does this goal need to be achieved for a total bonus completion? ");
-                        int targetCount = int.Parse(Console.ReadLine());
-
-                        Console.WriteLine("Points per achievement? ");
-                        int pointsPerAchievement = int.Parse(Console.ReadLine());
-
-                        Console.WriteLine("Bonus points on achievement? ");
-                        int totalBonus = int.Parse(Console.ReadLine());
-
-                        ChecklistGoal checklistGoal = new ChecklistGoal(name, points.ToString(), pointsPerAchievement, totalBonus);
-                        checklistGoal.TargetCount = targetCount;
-                        goals.Add(checklistGoal);
-                    }
-                    else
-                    {
-                        Console.WriteLine("Invalid Goal Type. Re-Attempt Goal");
-                    }
-                    break;
+                    case "2":
+                        Console.WriteLine("Your Goals:");
+                        for (int i = 0; i < goals.Count; i++)
+                        {
+                            string status = "[ ]";
+                            if (goals[i] is ChecklistGoal cg)
+                            {
+                                status = cg.IsComplete == "True" ? "[X]" : "[ ]";
+                                Console.WriteLine($"{i + 1}. {status} {cg.Name} (Completed {cg.CurrentCount}/{cg.TargetCount} times)");
+                            }
+                            else
+                            {
+                                status = goals[i].IsComplete == "True" ? "[X]" : "[ ]";
+                                Console.WriteLine($"{i + 1}. {status} {goals[i].Name}");
+                            }
+                        }
+                        break;
+                    case "3":
+                        // Save goals and score to file
+                        Console.Write("Enter filename to save: ");
+                        string saveFile = Console.ReadLine();
+                        using (var writer = new System.IO.StreamWriter(saveFile))
+                        {
+                            writer.WriteLine(totalPoints);
+                            foreach (var goal in goals)
+                            {
+                                if (goal is ChecklistGoal cg)
+                                {
+                                    writer.WriteLine($"Checklist|{cg.Name}|{cg.Points}|{cg.IsComplete}|{cg.TargetCount}|{cg.CurrentCount}|{cg.ValuePerCompletion}|{cg.BonusValue}");
+                                }
+                                else if (goal is SimpleGoal)
+                                {
+                                    writer.WriteLine($"Simple|{goal.Name}|{goal.Points}|{goal.IsComplete}");
+                                }
+                                else if (goal is EternalGoal)
+                                {
+                                    writer.WriteLine($"Eternal|{goal.Name}|{goal.Points}|{goal.IsComplete}");
+                                }
+                            }
+                        }
+                        Console.WriteLine("Goals and score saved.");
+                        break;
+                    case "4":
+                        // Load goals and score from file
+                        Console.Write("Enter filename to load: ");
+                        string loadFile = Console.ReadLine();
+                        if (!System.IO.File.Exists(loadFile))
+                        {
+                            Console.WriteLine("File not found.");
+                            break;
+                        }
+                        goals.Clear();
+                        string[] lines = System.IO.File.ReadAllLines(loadFile);
+                        if (lines.Length > 0)
+                            int.TryParse(lines[0], out totalPoints);
+                        for (int i = 1; i < lines.Length; i++)
+                        {
+                            var parts = lines[i].Split('|');
+                            if (parts[0] == "Simple")
+                            {
+                                var g = new SimpleGoal(parts[1], parts[2]);
+                                g.IsComplete = parts[3];
+                                goals.Add(g);
+                            }
+                            else if (parts[0] == "Eternal")
+                            {
+                                var g = new EternalGoal(parts[1], parts[2]);
+                                g.IsComplete = parts[3];
+                                goals.Add(g);
+                            }
+                            else if (parts[0] == "Checklist")
+                            {
+                                var g = new ChecklistGoal(parts[1], parts[2], int.Parse(parts[6]), int.Parse(parts[7]));
+                                g.IsComplete = parts[3];
+                                g.TargetCount = int.Parse(parts[4]);
+                                g.CurrentCount = int.Parse(parts[5]);
+                                goals.Add(g);
+                            }
+                        }
+                        Console.WriteLine("Goals and score loaded.");
+                        break;
 
                 case "5":
-                    Console.WriteLine("The goals are:");
+                    // Record Event
+                    Console.WriteLine("Which goal did you accomplish?");
                     for (int i = 0; i < goals.Count; i++)
                     {
                         Console.WriteLine($"{i + 1}. {goals[i].Name}");
                     }
-                    int selected = int.Parse(Console.ReadLine());
-                    Goal chosen = goals[selected - 1];
-                    int earned = 0;
-                    if (chosen is ChecklistGoal checklistGoal)
+                    int goalIndex = int.Parse(Console.ReadLine()) - 1;
+                    if (goalIndex >= 0 && goalIndex < goals.Count)
                     {
-                        int before = checklistGoal.CurrentCount;
-                        checklistGoal.Record();
-                        if (checklistGoal.CurrentCount > before)
+                        int earned = 0;
+                        var chosen = goals[goalIndex];
+                        if (chosen is ChecklistGoal checklistGoal)
                         {
+                            checklistGoal.Record();
                             earned = checklistGoal.ValuePerCompletion;
-                            if (checklistGoal.CurrentCount == checklistGoal.TargetCount)
+                            if (checklistGoal.IsComplete == "True")
                             {
                                 earned += checklistGoal.BonusValue;
                                 Console.WriteLine("Bonus ! You completed the checklist goal.");
                             }
                         }
-                    }
-                    else if (chosen is SimpleGoal simpleGoal)
-                    {
-                        if (simpleGoal.IsComplete == "False")
+                        else if (chosen is SimpleGoal simpleGoal)
                         {
-                            simpleGoal.Complete();
-                            earned = int.Parse(simpleGoal.Points);
+                            if (simpleGoal.IsComplete == "False")
+                            {
+                                simpleGoal.Complete();
+                                earned = int.Parse(simpleGoal.Points);
+                            }
+                            else
+                            {
+                                Console.WriteLine("This goal is already complete.");
+                            }
                         }
-                        else
+                        else if (chosen is EternalGoal eternalGoal)
                         {
-                            Console.WriteLine("This goal is already complete.");
+                            earned = int.Parse(eternalGoal.Points);
+                            Console.WriteLine("Eternal goal recorded. You can do this as many times as you want!");
                         }
-                    }
-                    else if (chosen is EternalGoal eternalGoal)
-                    {
-                        earned = int.Parse(eternalGoal.Points);
-                        Console.WriteLine("Eternal goal recorded. You can do this as many times as you want!");
-                    }
-                    totalPoints += earned;
-                    if (earned > 0)
-                    {
-                        Console.WriteLine($"Congratulations!! You earned {earned} points! Total: {totalPoints}");
+                        totalPoints += earned;
+                        if (earned > 0)
+                        {
+                            Console.WriteLine($"Congratulations!! You earned {earned} points! Total: {totalPoints}");
+                        }
                     }
                     break;
 
