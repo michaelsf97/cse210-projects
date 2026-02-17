@@ -28,8 +28,54 @@ public class SimpleGoal : Goal
     }
 }
 
+public class EternalGoal : Goal
+{
+    public EternalGoal(string name, string points)
+    {
+        Name = name;
+        Points = points;
+        IsComplete = "False";
+    }
+
+    public override void Complete()
+    {
+        base.Complete();
+    }
+}
+
+public class ChecklistGoal : Goal
+{
+    public int TargetCount { get; set; }
+    public int CurrentCount { get; set; }
+    public int ValuePerCompletion { get; set; }
+    public int BonusValue { get; set; }
+
+    public ChecklistGoal(string name, string points, int valuePerCompletion, int bonusValue)
+    {
+        Name = name;
+        TargetCount = targetCount;
+        ValuePerCompletion = valuePerCompletion;
+        BonusValue = bonusValue;
+        CurrentCount = 0;
+        IsComplete = false;
+    }
+
+    public void Record()
+    {
+        if (!IsComplete)
+        {
+            CurrentCount++;
+            if (CurrentCount >= TargetCount)
+            {
+                IsComplete = true;
+            }
+        }
+    }
+}
+
 
 class Program
+
 {
     static void Main(string[] args)
     {
@@ -55,6 +101,8 @@ class Program
     int totalPoints = 0;
 
     goals.Add(new SimpleGoal("Run a marathon", "1000"));
+    goals.Add(new EternalGoal("Read The Book Of Mormon", "100"));
+
 
     goals[0].Complete();
     if (goals[0].IsComplete == "True");
