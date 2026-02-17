@@ -103,13 +103,24 @@ class Program
         switch (input)
         {
             case "1":
-                Console.WriteLine("Select Goal Type:");
+                Console.WriteLine("The types of Goals are:");
                 Console.WriteLine("1. Simple Goal");
                 Console.WriteLine("2. Eternal Goal");
                 Console.WriteLine("3. Checklist Goal");
                 string goalType = Console.ReadLine();
 
+                Console.WriteLine("Which type of goal would you like to create? ");
+                string goalType = Console.ReadLine();
+                Console.WriteLine("What is the name of your goal? ");
+                string name = Console.ReadLine();
+                Console.WriteLine("What is a short description of it? ");
+                string description = Console.ReadLine();
+                Console.WriteLine("What is the amount of points associated with this goal? ");
+                string points = Console.ReadLine();
                 
+
+
+
             case "5":
                 if (goals[0] is ChecklistGoal checklistGoal)
                 {
