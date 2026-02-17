@@ -54,21 +54,20 @@ public class ChecklistGoal : Goal
     public ChecklistGoal(string name, string points, int valuePerCompletion, int bonusValue)
     {
         Name = name;
-        TargetCount = targetCount;
         ValuePerCompletion = valuePerCompletion;
         BonusValue = bonusValue;
         CurrentCount = 0;
-        IsComplete = false;
+        IsComplete = "False";
     }
 
     public void Record()
     {
-        if (!IsComplete)
+        if (IsComplete == "False")
         {
             CurrentCount++;
             if (CurrentCount >= TargetCount)
             {
-                IsComplete = true;
+                IsComplete = "True";
             }
         }
     }
@@ -116,6 +115,7 @@ class Program
 
                     Console.WriteLine("What is the amount of points associated with this goal? ");
                     int points = int.Parse(Console.ReadLine());
+                    break;
 
                     case "2":
                         Console.WriteLine("Your Goals:");
@@ -200,8 +200,9 @@ class Program
                         break;
 
                 case "5":
-                    // Record Event
+
                     Console.WriteLine("Which goal did you accomplish?");
+
                     for (int i = 0; i < goals.Count; i++)
                     {
                         Console.WriteLine($"{i + 1}. {goals[i].Name}");
