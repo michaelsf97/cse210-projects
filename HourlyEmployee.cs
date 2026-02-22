@@ -4,14 +4,29 @@ namespace cse210_demo
 
 {
     public class HourlyEmployee : Employee
-
     {
-        public float rate = 9f;
-        public float hours = 100f;
 
-        public override float CalculatePay()
-        {
-            return rate * hours;
-        }
+    
+    private float _payRate = 0;
+    private int _hoursWorked = 0;
+
+    public float GetPayRate()
+    {
+        return _payRate;
+    }
+
+    public void SetPayRate(float payRate)
+    {
+        _payRate = payRate;
+    }
+
+    public int GetHoursWorked()
+    {
+        return _hoursWorked;
+    }
+
+    public void SetHoursWorked(int hoursWorked)
+    {
+        _hoursWorked = hoursWorked;
     }
 }
