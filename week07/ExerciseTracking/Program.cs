@@ -116,7 +116,6 @@ class Program
 {
     static void Main(string[] args)
     {
-        // Create one activity of each type
         List<Activity> activities = new List<Activity>
         {
             new RunningActivity(new DateTime(2026, 2, 21), 30, 3.0),
@@ -124,7 +123,6 @@ class Program
             new SwimmingActivity(new DateTime(2026, 2, 21), 40, 40)
         };
 
-        // Iterate through list and display summary for each
         foreach (Activity activity in activities)
         {
             Console.WriteLine(activity.GetSummary());
