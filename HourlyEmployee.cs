@@ -1,6 +1,6 @@
 using System;
 
-namespace cse210
+namespace cse210projects
 
 {
     public class HourlyEmployee : Employee
