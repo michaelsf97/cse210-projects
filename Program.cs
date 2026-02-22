@@ -21,4 +21,13 @@ partial class Employee
         }
     }
 
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Employee.HourlyEmployee emp = new Employee.HourlyEmployee();
+            Console.WriteLine("emp.CalculatePay()");
+        }
+    }
+
 }
