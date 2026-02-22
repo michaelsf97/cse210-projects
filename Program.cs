@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace cse210_demo
+namespace cse210
 {
     class Program
     {

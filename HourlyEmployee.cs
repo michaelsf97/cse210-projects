@@ -1,6 +1,6 @@
 using System;
 
-namespace cse210_demo
+namespace cse210
 
 {
     public class HourlyEmployee : Employee
@@ -29,4 +29,10 @@ namespace cse210_demo
     {
         _hoursWorked = hoursWorked;
     }
+
+    public override float CalculatePay()
+    {
+        return _payRate * _hoursWorked;
+    }
+}
 }

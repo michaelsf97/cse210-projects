@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.CompilerServices;
 
-namespace cse210_demo
+namespace cse210
 {
     public class SalaryEmployee : Employee
     {
