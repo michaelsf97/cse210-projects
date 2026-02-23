@@ -36,6 +36,7 @@ namespace cse210projects
             Console.WriteLine($"{employee.GetName()}");
 
             float pay = employee.GetPay();
+            Console.WriteLine($"Pay: {employee.GetName()} will be paid {pay}");
 
         }
     }
