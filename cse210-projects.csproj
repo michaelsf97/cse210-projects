@@ -8,4 +8,15 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="week02\**" />
+    <Compile Remove="week01\**" />
+    <Compile Remove="week03\**" />
+    <Compile Remove="week04\**" />
+    <Compile Remove="week05\**" />
+    <Compile Remove="week06\**" />
+    <Compile Remove="week07\**" />
+    <Compile Remove="sandbox\**" />
+  </ItemGroup>
+
 </Project>
