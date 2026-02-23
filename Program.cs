@@ -6,9 +6,35 @@ namespace cse210projects
     {
         static void Main(string[] args)
         {
-            HourlyEmployee emp = new HourlyEmployee();
-            float pay = emp.CalculatePay();
-            Console.WriteLine($"Pay: {pay}");
+            HourlyEmployee hEmployee = new HourlyEmployee();
+            hEmployee.SetName("John");
+            hEmployee.SetIdNumber("123abc");
+            hEmployee.SetAddress("123 Main Street");
+            hEmployee.SetBirthday("08/04/1997");
+            hEmployee.SetPayRate(15);
+            hEmployee.SetHoursWorked(35);
+
+            SalaryEmployee sEmployee = new SalaryEmployee();
+            sEmployee.SetName("Peter");
+            sEmployee.SetIdNumber("456def");
+            sEmployee.SetAddress("456 Elm Street");
+            sEmployee.SetBirthday("08/04/1997");
+            sEmployee.SetAnnualSalary(60000);
+
+            DisplayEmployeeInformation(hEmployee);
+            DisplayEmployeeInformation(sEmployee);
+        }
+
+        public static void DisplayEmployeeInformation(Employee employee)
+        {
+            Console.WriteLine($"Name: {employee.GetName()}");
+            Console.WriteLine($"ID Number: {employee.GetIdNumber()}");
+            Console.WriteLine($"Address: {employee.GetAddress()}");
+            Console.WriteLine($"Birthday: {employee.GetBirthday()}");
+
+            float pay = employee.GetSalary();
+            Console.WriteLine($"{employee.GetName()}")
+
         }
     }
 }

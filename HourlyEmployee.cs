@@ -29,6 +29,12 @@ namespace cse210projects
 
         }
 
+        public override float GetPay()
+        {
+            return _hourlyWorked * payRate;
+        }
+
+
     
     }
 }

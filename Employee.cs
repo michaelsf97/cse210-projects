@@ -52,9 +52,9 @@ namespace cse210projects
         }
 
         
-        public virtual float CalculatePay()
+        public virtual float GetPay()
         {
-            return 0;
+            return -1;
         }
     }
 }

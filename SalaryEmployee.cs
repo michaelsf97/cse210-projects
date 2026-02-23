@@ -16,5 +16,10 @@ namespace cse210projects
 			_annualSalary = annualSalary;
 		}
 
+		public override float GetPay()
+		{
+			return _salary / 12;
+		}
+
 }
 }
