@@ -8,7 +8,7 @@ namespace cse210projects
         {
             HourlyEmployee hEmployee = new HourlyEmployee();
             hEmployee.SetName("John");
-            hEmployee.SetIdNumber(123);
+            hEmployee.SetIdNumber("123abc");
             hEmployee.SetAddress("123 Main Street");
             hEmployee.SetBirthday("08/04/1997");
             hEmployee.SetPayRate(15);
@@ -16,7 +16,7 @@ namespace cse210projects
 
             SalaryEmployee sEmployee = new SalaryEmployee();
             sEmployee.SetName("Peter");
-            sEmployee.SetIdNumber(456);
+            sEmployee.SetIdNumber("456def");
             sEmployee.SetAddress("456 Elm Street");
             sEmployee.SetBirthday("08/04/1997");
             sEmployee.SetAnnualSalary(60000);
@@ -30,7 +30,7 @@ namespace cse210projects
 
             foreach(Employee emp in employees)
             {
-                float pay = emp.GetPay();
+                DisplayEmployeeInformation(emp);
             }
         }
 
@@ -38,7 +38,11 @@ namespace cse210projects
         {
 
             float pay = employee.GetPay();
-            Console.WriteLine($"Pay: {employee.GetName()} will be paid ${pay}");
+            Console.WriteLine($"Name: {employee.GetName()}");
+            Console.WriteLine($"ID Number: {employee.GetIdNumber()}");
+            Console.WriteLine($"Address: {employee.GetAddress()}");
+            Console.WriteLine($"Birthday: {employee.GetBirthday()}");
+            Console.WriteLine($"Pay: ${pay}");
             Console.WriteLine();
 
         }
