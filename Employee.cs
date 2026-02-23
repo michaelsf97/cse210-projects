@@ -1,4 +1,5 @@
 using System;
+using System.Text.RegularExpressions;
 
 namespace cse210projects
 {
@@ -25,9 +26,13 @@ namespace cse210projects
             return _idNumber;
         }
 
-        public void SetIdNumber (int idNumber)
+        public void SetIdNumber (string idNumber)
         {
-            _idNumber = idNumber;
+            if (!Regex.IsMatch(idNumber, @"^[A\a-Za-z]{3}\d{3}$"))
+            {
+                throw new ArgumentException("ID number must be in the format of three digits followed by three letters (e.g., 123abc).");
+            }
+            _idNumber = idNumber.ToUpper();;
         }
 
         public string GetAddress()
