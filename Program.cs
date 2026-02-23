@@ -32,8 +32,10 @@ namespace cse210projects
             Console.WriteLine($"Address: {employee.GetAddress()}");
             Console.WriteLine($"Birthday: {employee.GetBirthday()}");
 
-            float pay = employee.GetSalary();
-            Console.WriteLine($"{employee.GetName()}")
+            float pay = employee.GetPay();
+            Console.WriteLine($"{employee.GetName()}");
+
+            float pay = employee.GetPay();
 
         }
     }

@@ -9,6 +9,8 @@ namespace cse210projects
 
         protected string _address;
         protected string _birthday;
+
+        protected float _payRate;
         
             public string GetName()
             {

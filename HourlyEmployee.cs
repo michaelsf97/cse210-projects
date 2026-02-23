@@ -19,7 +19,7 @@ namespace cse210projects
         }
 
         public float GetHoursWorked()
-        { 
+        {
             return _hoursWorked;
         }
 
@@ -31,10 +31,10 @@ namespace cse210projects
 
         public override float GetPay()
         {
-            return _hourlyWorked * payRate;
+            return _hoursWorked * _payRate;
         }
 
 
     
-    }
+        }
 }
