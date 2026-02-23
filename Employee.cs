@@ -52,7 +52,7 @@ namespace cse210projects
         }
 
         
-        public virtual float GetPay()
+        public abstract float GetPay()
         {
             return -1;
         }

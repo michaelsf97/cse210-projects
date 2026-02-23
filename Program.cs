@@ -23,14 +23,19 @@ namespace cse210projects
 
             DisplayEmployeeInformation(hEmployee);
             DisplayEmployeeInformation(sEmployee);
+
+            List<Employee> employees = new List<Employee>();
+            employees.Add(hEmployee);
+            employees.Add(sEmployee);
+
+            foreach(Employee emp in employees)
+            {
+                float pay = emp.GetPay();
+            }
         }
 
         public static void DisplayEmployeeInformation(Employee employee)
         {
-            Console.WriteLine($"Name: {employee.GetName()}");
-            Console.WriteLine($"ID Number: {employee.GetIdNumber()}");
-            Console.WriteLine($"Address: {employee.GetAddress()}");
-            Console.WriteLine($"Birthday: {employee.GetBirthday()}");
 
             float pay = employee.GetPay();
             Console.WriteLine($"Pay: {employee.GetName()} will be paid ${pay}");
