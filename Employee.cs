@@ -4,13 +4,11 @@ namespace cse210projects
 {
     public class Employee
     {
-        protected string _name;
+        protected string _name = string.Empty;
         protected int _idNumber;
 
-        protected string _address;
-        protected string _birthday;
-
-        protected float _payRate;
+        protected string _address = string.Empty;
+        protected string _birthday = string.Empty;
         
             public string GetName()
             {
