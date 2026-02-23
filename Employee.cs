@@ -2,7 +2,7 @@ using System;
 
 namespace cse210projects
 {
-    public class Employee
+    public abstract class Employee
     {
         protected string _name = string.Empty;
         protected int _idNumber;
@@ -52,9 +52,6 @@ namespace cse210projects
         }
 
         
-        public abstract float GetPay()
-        {
-            return -1;
-        }
+        public abstract float GetPay();
     }
 }
