@@ -26,7 +26,7 @@ namespace cse210projects
     public virtual string GetSummary()
     {
         return $"{_date:dd MMM yyyy} {GetType().Name} ({_minutes} min) - " +
-               $"Distance: {GetDistance():F1} miles, Speed: {GetSpeed():F1} mph, " +
+               $"Distance: {GetDistance():F1} Miles, Speed: {GetSpeed():F1} mph, " +
                $"Pace: {GetPace():F2} min per mile";
     }
     }
