@@ -1,6 +1,8 @@
 using System;
 
-class RunningActivity : Activity
+namespace cse210projects
+{
+    class RunningActivity : Activity
 {
     private double _distanceMiles;
 
@@ -24,4 +26,5 @@ class RunningActivity : Activity
     {
         return GetMinutes() / _distanceMiles;
     }
+}
 }
