@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
 
-
-abstract class Activity
+namespace cse210projects
 {
-    private DateTime _date;
-    private int _minutes;
+    abstract class Activity
+    {
+        private DateTime _date;
+        private int _minutes;
 
     protected Activity(DateTime date, int minutes)
     {
@@ -27,5 +28,6 @@ abstract class Activity
         return $"{_date:dd MMM yyyy} {GetType().Name} ({_minutes} min) - " +
                $"Distance: {GetDistance():F1} miles, Speed: {GetSpeed():F1} mph, " +
                $"Pace: {GetPace():F2} min per mile";
+    }
     }
 }
