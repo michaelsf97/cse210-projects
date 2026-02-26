@@ -4,8 +4,26 @@ class Program
 {
     static void Main(string[] args)
     {
+        Console.Write("Enter Number: ");
+        string valueFromUser = Console.ReadLine();
 
-        // This is prep 2 //
-        Console.WriteLine("Hello Sandbox World!!!.");
+        int x = int.Parse(valueFromUser);
+        int y = 2;
+        int z = 5;
+
+        if ((x > y) && (x > z) && y > z)
+        {
+            Console.WriteLine("Greater");
+        }
+        else if (x < y)
+        {
+            Console.WriteLine("Less");
+        }
+
+
+        else 
+        {
+            Console.WriteLine("Equal");
+        }
     }
 }
